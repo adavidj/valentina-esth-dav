@@ -1,13 +1,114 @@
+/* Loader */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffeef2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-wrapper.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.heart-loader {
+    font-size: 5rem;
+    animation: heartBeat 1s infinite;
+}
+
+.loader-wrapper p {
+    font-family: 'Dancing Script', cursive;
+    color: #d63384;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+body.is-loading {
+    overflow: hidden;
+}
+
 body {
-    background-color: #ffeef2;
+    background: linear-gradient(135deg, #ffeef2 0%, #ffcfdf 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Quicksand', sans-serif;
     overflow: hidden;
     position: relative;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='fill:red'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+    max-width: 90%;
+    overflow-y: auto;
+    max-height: 85vh;
+    transition: all 0.5s ease;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    color: #d63384;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.love-text {
+    font-size: 1.3rem;
+    color: #555;
+    line-height: 1.8;
+    margin: 25px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cursor-blink {
+    border-right: 3px solid #ff4d6d;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+#main-gif, .main-video {
+    max-width: 300px;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: opacity 0.8s ease-in-out;
+    border: 5px solid white;
+}
+
+.gif-container {
+    height: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .heart {
@@ -18,113 +119,237 @@ body {
     pointer-events: none;
     animation: float 5s linear infinite;
     opacity: 0.6;
+    z-index: -1;
 }
 
 @keyframes float {
     0% {
-        transform: translateY(100vh) rotate(0deg);
+        transform: translateY(100vh) rotate(0deg) scale(1);
         opacity: 1;
     }
     100% {
-        transform: translateY(-10vh) rotate(360deg);
+        transform: translateY(-10vh) rotate(360deg) scale(1.5);
         opacity: 0;
     }
-}
-
-.container {
-    text-align: center;
-    background: white;
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    max-width: 90%;
-    overflow-y: auto;
-    max-height: 80vh;
-}
-
-h1 {
-    color: #d63384;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-}
-
-.love-text {
-    font-size: 1.2rem;
-    color: #444;
-    line-height: 1.6;
-    margin: 20px 0;
-    text-align: center;
-    animation: fadeIn 2s ease-in;
-}
-
-#main-gif, .main-video {
-    max-width: 300px;
-    height: 300px;
-    object-fit: contain;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: opacity 0.8s ease-in-out;
-}
-
-.gif-container {
-    height: 320px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.gif-container img {
-    max-width: 300px;
-    border-radius: 10px;
-    margin-bottom: 2rem;
 }
 
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
     position: relative;
-    height: 100px;
+    height: 120px;
+    margin-top: 20px;
 }
 
 #yesBtn {
-    background-color: #ff4d6d;
+    background: linear-gradient(45deg, #ff0a54, #ff758f, #ff0a54);
+    background-size: 200% auto;
     color: white;
     border: none;
-    padding: 30px 60px;
-    font-size: 2rem;
-    border-radius: 50px;
+    padding: 25px 50px;
+    font-size: 2.2rem;
+    border-radius: 60px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     font-weight: bold;
-    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.5);
-    animation: pulse 1.5s infinite;
+    box-shadow: 0 10px 25px rgba(255, 10, 84, 0.4);
+    animation: heartBeat 1.5s infinite, shimmer 3s linear infinite;
 }
 
-@keyframes pulse {
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes heartBeat {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    14% { transform: scale(1.1); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
 }
 
 #yesBtn:hover {
-    transform: scale(1.2);
-    background-color: #ff758f;
+    transform: scale(1.2) rotate(3deg);
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
 }
 
 #noBtn {
-    background-color: #6c757d;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border: 2px solid #6c757d;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+/* Styles pour la Rose 4K */
+.rose-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.rose-svg {
+    width: 450px;
+    height: 550px;
+    filter: drop-shadow(0 20px 40px rgba(214, 51, 132, 0.2));
+}
+
+.rose-path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
+.stem {
+    stroke: url(#stemGradient);
+    stroke-width: 5;
+    animation: drawRose 3s ease-out forwards;
+}
+
+.leaf {
+    stroke: url(#stemGradient);
+    stroke-width: 3;
+    animation: drawRose 2s ease-out forwards;
+}
+
+.leaf.left { animation-delay: 1.5s; }
+.leaf.right { animation-delay: 2.5s; }
+
+.leaf-filled {
+    fill: #2d6a4f;
+    opacity: 0;
+    animation: fadeInColor 1s ease-out 3s forwards;
+}
+
+.petal-layer-1 {
+    stroke: url(#roseGradient);
+    stroke-width: 2;
+    animation: drawRose 2s ease-in-out 3.5s forwards, fillLayer1 2s ease-in-out 5s forwards;
+}
+
+.petal-layer-2 {
+    stroke: url(#roseGradient);
+    stroke-width: 1.5;
+    animation: drawRose 2s ease-in-out 4.5s forwards, fillLayer2 2s ease-in-out 6s forwards;
+}
+
+.petal-layer-3 {
+    stroke: url(#roseGradient);
+    stroke-width: 1;
+    animation: drawRose 2s ease-in-out 5.5s forwards, fillLayer3 2s ease-in-out 7s forwards;
+}
+
+.petal-center {
+    stroke: #ff0a54;
+    stroke-width: 1;
+    animation: drawRose 1.5s ease-in-out 6.5s forwards, fillCenter 1s ease-in-out 8s forwards;
+}
+
+.glow-center {
+    fill: #ff477e;
+    opacity: 0;
+    filter: url(#glow);
+    animation: glowPulse 2s infinite 8s, fadeIn 1s forwards 8s;
+}
+
+@keyframes drawRose {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes fillLayer1 {
+    to { fill: #c9184a; opacity: 0.9; }
+}
+
+@keyframes fillLayer2 {
+    to { fill: #ff477e; opacity: 0.95; }
+}
+
+@keyframes fillLayer3 {
+    to { fill: #ff758f; opacity: 1; }
+}
+
+@keyframes fillCenter {
+    to { fill: #ff0a54; }
+}
+
+@keyframes fadeInColor {
+    to { opacity: 0.8; fill: #2d6a4f; }
+}
+
+@keyframes glowPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+.rose-text {
+    font-family: 'Dancing Script', cursive;
+    color: #d63384;
+    font-size: 3rem;
+    margin-top: 10px;
+    opacity: 0;
+    text-shadow: 0 0 15px rgba(255, 77, 109, 0.3);
+    animation: fadeIn 2s ease-in-out 9s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.close-rose {
+    margin-top: 20px;
+    padding: 12px 40px;
+    background: linear-gradient(45deg, #ff0a54, #ff758f);
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    box-shadow: 0 5px 20px rgba(255, 10, 84, 0.4);
+    transition: all 0.3s ease;
 }
+
+.close-rose:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 10, 84, 0.6);
+}
+
+#openRoseBtn {
+    display: none;
+    margin: 20px auto;
+    padding: 15px 40px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

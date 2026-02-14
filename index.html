@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veux-tu être ma Valentine ?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="is-loading">
+    <div id="loader" class="loader-wrapper">
+        <div class="heart-loader">❤️</div>
+        <p>Chargement de l'amour...</p>
+    </div>
+
     <div class="container">
-        <h1> Ma Reine Esther👑, <br> Veux-tu être ma Valentine ? ❤️ </h1>
+        <h1>Veux-tu être ma Valentine ? ❤️</h1>
         <div class="gif-container" id="media-container">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Animated-Heart-04.gif" alt="Valentine Ask" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=300&auto=format&fit=crop'">
         </div>
@@ -17,6 +25,59 @@
             <button id="noBtn">Non 😢</button>
         </div>
     </div>
+
+    <!-- Container pour la Rose Animée (Qualité 4K) -->
+    <div id="roseOverlay" class="rose-container">
+        <svg class="rose-svg" viewBox="0 0 200 250">
+            <defs>
+                <linearGradient id="roseGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ff0a54;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#ff477e;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#c9184a;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="stemGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#2d6a4f;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#081c15;stop-opacity:1" />
+                </linearGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            
+            <!-- Tige -->
+            <path class="rose-path stem" d="M100,240 C100,200 90,150 100,100" />
+            
+            <!-- Feuilles -->
+            <path class="rose-path leaf left" d="M100,200 C70,190 50,160 30,180 C45,210 75,210 100,200" />
+            <path class="rose-path leaf right" d="M100,160 C130,150 150,120 170,140 C155,170 125,170 100,160" />
+
+            <!-- Pétales complexes (plusieurs couches) -->
+            <!-- Couche 1 (Bas) -->
+            <path class="rose-path petal-layer-1" d="M100,105 C60,105 40,60 100,40 C160,60 140,105 100,105" />
+            
+            <!-- Couche 2 (Milieu-Extérieur) -->
+            <path class="rose-path petal-layer-2" d="M100,100 C50,90 50,50 90,30 C100,30 110,30 110,30 C150,50 150,90 100,100" />
+            <path class="rose-path petal-layer-2" d="M100,100 C70,110 40,80 60,50 C80,30 100,40 100,40" />
+            <path class="rose-path petal-layer-2" d="M100,100 C130,110 160,80 140,50 C120,30 100,40 100,40" />
+
+            <!-- Couche 3 (Milieu-Intérieur) -->
+            <path class="rose-path petal-layer-3" d="M100,90 C80,85 75,65 100,55 C125,65 120,85 100,90" />
+            <path class="rose-path petal-layer-3" d="M100,90 C85,95 70,80 80,65 C90,55 100,60 100,60" />
+            <path class="rose-path petal-layer-3" d="M100,90 C115,95 130,80 120,65 C110,55 100,60 100,60" />
+
+            <!-- Couche 4 (Cœur) -->
+            <path class="rose-path petal-center" d="M100,80 C90,75 90,65 100,60 C110,65 110,75 100,80" />
+            <circle class="rose-path glow-center" cx="100" cy="70" r="5" />
+        </svg>
+        <h2 class="rose-text">Ma Rose Éternelle ❤️</h2>
+        <button class="close-rose" onclick="document.getElementById('roseOverlay').style.display='none'">Fermer</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
